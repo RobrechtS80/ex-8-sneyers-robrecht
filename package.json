@@ -1,0 +1,17 @@
+{
+  "name": "Prober_request_nodejs",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Robrecht-pc",
+  "contributors": [],
+  "dependencies": {
+    "mongodb": "^2.2.12",
+    "request": "^2.79.0"
+  }
+}
