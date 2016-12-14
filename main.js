@@ -21,7 +21,10 @@ var Drone = function (id, name, mac) {
 	this.name = name;
 	this.mac = mac;
 };
-
+var File = function (id,date_loaded,date_first_record,date_last_record,contents_count){
+    
+    
+}
 var dronesSettings = new Settings("/drones?format=json");
 
 dal.clearDrone();
@@ -46,7 +49,14 @@ request(dronesSettings, function (error, response, dronesString) {
                           var fileInfoSettings = new Settings("/files/"+fileInfo.id+ "?format=JSON");
                           request (fileInfoSettings,function (error,response,fileInfoString){
                               var fileInfos = JSON.parse(fileInfoString);
-                              console.log (fileInfos);
+                              //console.log (fileInfos);
+                              dal.insertfileInfos(new File(
+                                      fileInfos.id,
+                              fileInfos.date_loaded,
+                              fileInfos.date_first_record,
+                              fileInfos.date_last_record,
+                              fileInfos.contents_count
+                            ));
                           });
                       });
              });
