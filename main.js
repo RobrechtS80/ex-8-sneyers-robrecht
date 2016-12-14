@@ -22,9 +22,13 @@ var Drone = function (id, name, mac) {
 	this.mac = mac;
 };
 var File = function (id,date_loaded,date_first_record,date_last_record,contents_count){
+    this._id=id;
+    this.date_loaded = date_loaded;
+    this.date_first_record = date_first_record;
+    this.date_last_record = date_last_record;
+    this.contents_count = contents_count;
     
-    
-}
+};
 var dronesSettings = new Settings("/drones?format=json");
 
 dal.clearDrone();

@@ -20,7 +20,15 @@ var dal = {
 				//callback(result);
 				db.close();
 			});
-		})
+		});
+	},
+        insertfileInfos: function (files) {
+		this.connect(null, function (db) {
+			db.collection('files').insert(files,function (err, result) {
+				//callback(result);
+				db.close();
+			});
+		});
 	},
 	insertDrone: function (drone, callback) {
 		this.connect(null, function (db) {
