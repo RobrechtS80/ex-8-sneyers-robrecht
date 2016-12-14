@@ -61,11 +61,13 @@ request(dronesSettings, function (error, response, dronesString) {
                               fileInfos.date_last_record,
                               fileInfos.contents_count
                             ));
-                    var droneInfoSettings= new Settings("/files?drone_id.is="+ drone.id + "&format=JSON");
+                    var contentSettings= new Settings("/files/"+ fileInfo.id + "/contents?format=JSON");
                    //console.log(droneInfoSettings);
-                    request(droneInfoSettings, function (error,response, droneInfoString){
-                 var droneInfo= JSON.parse(droneInfoString);
+                    request(contentSettings, function (error,response, contentString){
+                 var contents= JSON.parse(contentString);
+                    console.log(contents);
                     
+                    });
                           });
                       });
              });
