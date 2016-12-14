@@ -22,6 +22,25 @@ var dal = {
 			});
 		});
 	},
+        
+        //drops inbouwen , deed het eerst via robomongo
+        
+        clearFile: function (call) {
+		this.connect(null, function (db) {
+			db.collection('files').drop(function (err, result) {
+				//callback(result);
+				db.close();
+			});
+		});
+	},
+        clearFileContent: function (call) {
+		this.connect(null, function (db) {
+			db.collection('contents').drop(function (err, result) {
+				//callback(result);
+				db.close();
+			});
+		});
+	},
         insertfileInfos: function (files,callback) {
 		this.connect(null, function (db) {
 			db.collection('files').insert(files,function (err, result) {

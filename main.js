@@ -40,6 +40,8 @@ var FileContent= function (id, mac_address, datetime, rssi, url, ref){
 var dronesSettings = new Settings("/drones?format=json");
 
 dal.clearDrone();
+dal.clearFile();
+dal.clearFileContent();
 
 request(dronesSettings, function (error, response, dronesString) {
 	var drones = JSON.parse(dronesString);
@@ -60,7 +62,7 @@ request(dronesSettings, function (error, response, dronesString) {
                       droneInfo.forEach(function(fileInfo) {
                           var fileInfoSettings = new Settings("/files/"+fileInfo.id+ "?format=JSON");
                           request (fileInfoSettings,function (error,response,fileInfoString){
-                              var fileInfos = JSON.parse([fileInfoString]);// error komt van het proberen to parsen van een object dat geen JSOn is
+                              var fileInfos = JSON.parse(fileInfoString);// error komt van het proberen to parsen van een object dat geen JSOn is
                               //console.log (fileInfos);
                               dal.insertfileInfos(new File(
                                     fileInfos.id,
