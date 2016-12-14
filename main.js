@@ -62,6 +62,7 @@ request(dronesSettings, function (error, response, dronesString) {
                       droneInfo.forEach(function(fileInfo) {
                           var fileInfoSettings = new Settings("/files/"+fileInfo.id+ "?format=JSON");
                           request (fileInfoSettings,function (error,response,fileInfoString){
+                              try{ 
                               var fileInfos = JSON.parse(fileInfoString);// error komt van het proberen to parsen van een object dat geen JSOn is
                               //console.log (fileInfos);
                               dal.insertfileInfos(new File(
@@ -96,7 +97,9 @@ request(dronesSettings, function (error, response, dronesString) {
                         });
                     });
                     });
+                     }catch (e){console.log(e);}
                           });
+                     
                       });
              });
 		});    
