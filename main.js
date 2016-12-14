@@ -43,7 +43,7 @@ request(dronesSettings, function (error, response, dronesString) {
                  //console.log(droneInfoString);
                        // console.log(droneInfo);
                       droneInfo.forEach(function(fileInfo) {
-                          var fileInfoSettings = new Settings("/files/"+fileInfo.id+ "&format=JSON");
+                          var fileInfoSettings = new Settings("/files/"+fileInfo.id+ "?format=JSON");
                           request (fileInfoSettings,function (error,response,fileInfoString){
                               var fileInfos = JSON.parse(fileInfoString);
                               console.log (fileInfos);
