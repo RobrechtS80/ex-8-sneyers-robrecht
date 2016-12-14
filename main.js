@@ -65,8 +65,25 @@ request(dronesSettings, function (error, response, dronesString) {
                    //console.log(droneInfoSettings);
                     request(contentSettings, function (error,response, contentString){
                  var contents= JSON.parse(contentString);
-                    console.log(contents);
+                    //console.log(contents);
                     
+                    contents.forEach(function(contentFile){
+                        var contentFileSettings = new Settings("/files/"+ fileInfo.id + "/contents/"+contentFile.id+"?format=JSON");
+                        request (contentFileSettings,function (error,response,contentFileString){
+                            var contentFile=JSON.parse(contentFileString);
+                            dal.instertFilecontent(
+                                    new FileContent(
+                                    contentFile.id,
+                             contentFile.mac_address,
+                              contentFile.datetime,
+                               contentFile.rssi,
+                                contentFile.url,
+                                contentFile.ref //veel meer informatie in JSOn formaat /makkerlijker af te lezezn
+                                    )
+                                    );
+                            
+                        });
+                    });
                     });
                           });
                       });
