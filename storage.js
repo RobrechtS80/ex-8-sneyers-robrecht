@@ -22,9 +22,18 @@ var dal = {
 			});
 		});
 	},
-        insertfileInfos: function (files) {
+        insertfileInfos: function (files,callback) {
 		this.connect(null, function (db) {
 			db.collection('files').insert(files,function (err, result) {
+				//callback(result);
+				db.close();
+			});
+		});
+	},
+        
+        instertFilecontent: function (contents,callback) {
+		this.connect(null, function (db) {
+			db.collection('contents').insert(contents,function (err, result) {
 				//callback(result);
 				db.close();
 			});

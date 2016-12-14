@@ -29,6 +29,14 @@ var File = function (id,date_loaded,date_first_record,date_last_record,contents_
     this.contents_count = contents_count;
     
 };
+var FileContent= function (id, mac_address, datetime, rssi, url, ref){
+   this._id = id;
+    this.mac_address = mac_address;
+    this.datetime = datetime;
+    this.rssi = rssi;
+    this.url = url;
+    this.ref = ref;  
+};
 var dronesSettings = new Settings("/drones?format=json");
 
 dal.clearDrone();
@@ -55,11 +63,11 @@ request(dronesSettings, function (error, response, dronesString) {
                               var fileInfos = JSON.parse(fileInfoString);
                               //console.log (fileInfos);
                               dal.insertfileInfos(new File(
-                                      fileInfos.id,
-                              fileInfos.date_loaded,
-                              fileInfos.date_first_record,
-                              fileInfos.date_last_record,
-                              fileInfos.contents_count
+                                    fileInfos.id,
+                             fileInfos.date_loaded,
+                             fileInfos.date_first_record,
+                             fileInfos.date_last_record,
+                            fileInfos.contents_count
                             ));
                     var contentSettings= new Settings("/files/"+ fileInfo.id + "/contents?format=JSON");
                    //console.log(droneInfoSettings);
@@ -71,6 +79,7 @@ request(dronesSettings, function (error, response, dronesString) {
                         var contentFileSettings = new Settings("/files/"+ fileInfo.id + "/contents/"+contentFile.id+"?format=JSON");
                         request (contentFileSettings,function (error,response,contentFileString){
                             var contentFile=JSON.parse(contentFileString);
+                            console.log(contentFile);
                             dal.instertFilecontent(
                                     new FileContent(
                                     contentFile.id,
