@@ -21,21 +21,23 @@ var Drone = function (id, name, mac) {
 	this.name = name;
 	this.mac = mac;
 };
-var File = function (id,date_loaded,date_first_record,date_last_record,contents_count){
+var File = function (id,date_loaded,date_first_record,date_last_record,contents_count,droneid){
     this._id=id;
     this.date_loaded = date_loaded;
     this.date_first_record = date_first_record;
     this.date_last_record = date_last_record;
     this.contents_count = contents_count;
+    this.droneid = droneid;
     
 };
-var FileContent= function (id, mac_address, datetime, rssi, url, ref){
+var FileContent= function (id, mac_address, datetime, rssi, url, ref,droneid){
    this._id = id;
     this.mac_address = mac_address;
     this.datetime = datetime;
     this.rssi = rssi;
     this.url = url;
     this.ref = ref;  
+    this.droneid=droneid;
 };
 var dronesSettings = new Settings("/drones?format=json");
 
@@ -70,7 +72,8 @@ request(dronesSettings, function (error, response, dronesString) {
                              fileInfos.date_loaded,
                              fileInfos.date_first_record,
                              fileInfos.date_last_record,
-                            fileInfos.contents_count
+                            fileInfos.contents_count,
+                            drone.id // toegevoegs zoals beschreven stond in opdracht op toledo
                             ));
                     var contentSettings= new Settings("/files/"+ fileInfo.id + "/contents?format=JSON");
                    //console.log(droneInfoSettings);
@@ -90,7 +93,8 @@ request(dronesSettings, function (error, response, dronesString) {
                               contentFile.datetime,
                                contentFile.rssi,
                                 contentFile.url,
-                                contentFile.ref //veel meer informatie in JSOn formaat /makkerlijker af te lezezn
+                                contentFile.ref,//veel meer informatie in JSOn formaat /makkerlijker af te lezezn
+                                        drone.id
                                     )
                                     );
                             
